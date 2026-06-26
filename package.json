@@ -1,0 +1,22 @@
+{
+  "name": "login_ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && nodemon dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "express": "^5.2.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "env": "^0.0.2",
+    "mysql2": "^3.22.5"
+  }
+}
