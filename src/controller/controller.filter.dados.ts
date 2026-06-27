@@ -1,7 +1,7 @@
 import ValidationErrors from "../Errors/errors.validadition"; // Classe de erros personalizada
 import { buscaBD } from "../model/model.buscar";
 import Insert_user from "../model/model.inserir.user";
-import { hashPass } from "../services/service.hashPass";
+import { hashPass } from "../services/service.bcrypt";
 
 export default async function FilterData(user:any, reqType:string) {
     let erros:string[] = []; // Array de erros encontrados
@@ -16,7 +16,7 @@ export default async function FilterData(user:any, reqType:string) {
         if(regex.test(user.nome_usuario) || regex.test(user.sobrenome_usuario)){
             erros.push("Nome e sobrenome não podem conter números");
         } 
-    } else if(reqType == "Cadastro"){
+    } else if(!user.nome_usuario && !user.sobrenome_usuario && reqType == "Cadastro"){
         erros.push("Nome e sobrenome são campos obrigatórios!");
     }
     //! Verificação de email:  
@@ -69,13 +69,14 @@ export default async function FilterData(user:any, reqType:string) {
     if(erros.length > 0) {
         throw new ValidationErrors(erros);
     }else{
+        // Se houver senha faz o hash:
         if(user.senha_usuario){
             user.senha_usuario = await hashPass(user.senha_usuario);
         }
         
     }
 
-    // Verificando quem solicitou:
+    // Verificando qual o tipo de requisição:
     if(reqType == "Cadastro"){
         return await Insert_user(user);
     }

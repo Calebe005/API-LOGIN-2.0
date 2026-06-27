@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import ValidationErrors from "../Errors/errors.validadition";
 
 // Retornar hash de senha:
 export async function hashPass(password:string){
@@ -11,7 +10,7 @@ export async function hashPass(password:string){
 }
 
 // Comparar senha:
-export async function comparePass(password:string) {
-    
+export async function comparePass(password:string, BDPass:string) {
+    const result = await bcrypt.compare(password,BDPass);
+    return result;
 }
-

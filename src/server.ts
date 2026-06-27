@@ -6,7 +6,7 @@ dotenv.config(); // Variáveis de ambiente;
 // Import de Rotas:
 import rt_pesquisa from "./routes/rt_pesquisa"
 import rt_delete from "./routes/rt_delete"
-import rt_login from "./routes/rt.cadastro"
+import rt_login from "./routes/rt_login"
 import rt_update from "./routes/rt_update"
 import rt_cadastro from "./routes/rt.cadastro"
 import { errorHandler } from './Errors/midle.errors';
@@ -22,7 +22,6 @@ app.use("/cadastro", rt_cadastro); // Cadastrar usuário
 app.use("/login", rt_login); // Fazer Login
 app.use("/delete", rt_delete); // Deletar usuário
 app.use("/update", rt_update); // Atualizar cadastro
-
 
 app.use(errorHandler);//! Midleware de errors.
 

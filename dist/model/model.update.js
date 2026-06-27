@@ -19,8 +19,8 @@ async function updateBD(data, keyUpDate, upData, hash) {
             vUpdates.push(data);
         }
     });
+    // Trasnformando em string para sql
     const setClausule = qntUpDate.join(",");
-    console.log(setClausule);
     // Atualizando dados;
     const [result] = await model_connect_1.default.execute(`UPDATE \`usuario\` SET ${setClausule} WHERE \`id_usuario\` = ${data}`, vUpdates);
     return "Usuário atualizado!";

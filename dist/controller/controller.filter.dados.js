@@ -7,7 +7,7 @@ exports.default = FilterData;
 const errors_validadition_1 = __importDefault(require("../Errors/errors.validadition")); // Classe de erros personalizada
 const model_buscar_1 = require("../model/model.buscar");
 const model_inserir_user_1 = __importDefault(require("../model/model.inserir.user"));
-const service_hashPass_1 = require("../services/service.hashPass");
+const service_bcrypt_1 = require("../services/service.bcrypt");
 async function FilterData(user, reqType) {
     let erros = []; // Array de erros encontrados
     let regex; // Armazena exigencias de filtragens.
@@ -21,7 +21,7 @@ async function FilterData(user, reqType) {
             erros.push("Nome e sobrenome não podem conter números");
         }
     }
-    else if (reqType == "Cadastro") {
+    else if (!user.nome_usuario && !user.sobrenome_usuario && reqType == "Cadastro") {
         erros.push("Nome e sobrenome são campos obrigatórios!");
     }
     //! Verificação de email:  
@@ -70,11 +70,12 @@ async function FilterData(user, reqType) {
         throw new errors_validadition_1.default(erros);
     }
     else {
+        // Se houver senha faz o hash:
         if (user.senha_usuario) {
-            user.senha_usuario = await (0, service_hashPass_1.hashPass)(user.senha_usuario);
+            user.senha_usuario = await (0, service_bcrypt_1.hashPass)(user.senha_usuario);
         }
     }
-    // Verificando quem solicitou:
+    // Verificando qual o tipo de requisição:
     if (reqType == "Cadastro") {
         return await (0, model_inserir_user_1.default)(user);
     }
