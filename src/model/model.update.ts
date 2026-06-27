@@ -1,4 +1,4 @@
-import {ResultSetHeader} from "mysql2";
+import { ResultSetHeader } from "mysql2";
 import poll from "./model.connect";
 
 export default async function updateBD(
@@ -11,11 +11,11 @@ export default async function updateBD(
 
   let qntUpDate: string[] = []; // Quantidade de Updates;
   let vUpdates: string[] = []; // Valores para update;
- 
+
   // Verificando quantidade de updates.
   dados.forEach((data, i) => {
-    qntUpDate.push("\`"+keyUpDate[i]+"\`"+"= ? ");
-    
+    qntUpDate.push("\`" + keyUpDate[i] + "\`" + "= ? ");
+
     if (keyUpDate[i] == "senha_usuario") {
       vUpdates.push(hash);
     } else {
@@ -28,7 +28,7 @@ export default async function updateBD(
   // Atualizando dados;
   const [result] = await poll.execute<ResultSetHeader>(
     `UPDATE \`usuario\` SET ${setClausule} WHERE \`id_usuario\` = ${data}`,
-    vUpdates
+    vUpdates,
   );
 
   return "Usuário atualizado!";
