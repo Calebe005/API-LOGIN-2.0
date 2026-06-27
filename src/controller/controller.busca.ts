@@ -1,4 +1,3 @@
-import { RowDataPacket } from 'mysql2';
 import { buscaBD } from "../model/model.buscar"
 
 interface requisition {

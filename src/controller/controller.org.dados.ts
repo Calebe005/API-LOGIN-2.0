@@ -27,5 +27,5 @@ export async function DUser(req:any){
             typeof valor === "string" && chave != "senha_usuario"? valor.toUpperCase() : valor
             ]));
 
-    return await FilterData(dataUser);// Controller para Filtragem dos dados;
+    return await FilterData(dataUser, "Cadastro");// Controller para Filtragem dos dados;
 }
