@@ -14,7 +14,7 @@ async function FilterData(user) {
     // Verificação de nome e sobrenome:
     regex = /\d/; // Teste se possui número
     if (user.nome_usuario && user.sobre_nome_usuario) {
-        if (user.nome_usuario.length > 20 || user.sobre_nome_usuario > 20) {
+        if (user.nome_usuario.length > 20 || user.sobre_nome_usuario.length > 20) {
             erros.push("Nome ou sobre nome inválido!");
         }
         if (regex.test(user.nome_usuario) || regex.test(user.sobre_nome_usuario)) {
@@ -24,21 +24,24 @@ async function FilterData(user) {
     else {
         erros.push("Nome e sobrenome são campos obrigatórios!");
     }
-    //! Verificação de email:
-    // Emails validos:
-    let ValidEmail = ["@GMAIL", "@HOTMAIL", "@YAHOO"];
-    // Verifica se o e-mail possui um e somente um dos emails validos.
-    if (!ValidEmail.some(c => user.email_usuario.includes(c)) || user.email_usuario.split("@").length != 2) {
-        erros.push("Email Inválido!");
-    }
-    if (user.email_usuario.length > 30) {
-        erros.push("Email Muito longo!");
-    }
-    // Verficar se o e-mail já foi cadastrado:
-    if (await (0, model_buscar_1.buscaQntEmail)(user.email_usuario) >= 1) {
-        erros.push("E-mail já cadastrado!");
+    //! Verificação de email:  
+    if (user.email_usuario) {
+        // Emails validos:
+        let ValidEmail = ["@GMAIL", "@HOTMAIL", "@YAHOO"];
+        // Verifica se o e-mail possui um e somente um dos emails validos.
+        if (!ValidEmail.some(c => user.email_usuario.includes(c)) || user.email_usuario.split("@").length != 2) {
+            erros.push("Email Inválido!");
+        }
+        if (user.email_usuario.length > 30) {
+            erros.push("Email Muito longo!");
+        }
+        // Verficar se o e-mail já foi cadastrado:
+        if (Number(await (0, model_buscar_1.buscaBD)(user.email_usuario, "BuscaQntEmail")) >= 1) {
+            erros.push("E-mail já cadastrado!");
+        }
     }
     //! Verificação de Senha:
+    if (user.senha_usuario) { }
     if (user.senha_usuario.length > 20) {
         erros.push("Senha muito longa!");
     }

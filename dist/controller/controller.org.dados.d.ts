@@ -1,2 +1,2 @@
-export default function DUser(req: any): Promise<string>;
+export declare function DUser(req: any): Promise<string>;
 //# sourceMappingURL=controller.org.dados.d.ts.map

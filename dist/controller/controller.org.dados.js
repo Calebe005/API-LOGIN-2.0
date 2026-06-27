@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = DUser;
+exports.DUser = DUser;
 const controller_filter_dados_1 = __importDefault(require("./controller.filter.dados"));
 // Função para organizar os dados recebidos;
 async function DUser(req) {

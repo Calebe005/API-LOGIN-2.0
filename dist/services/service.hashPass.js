@@ -8,7 +8,7 @@ exports.comparePass = comparePass;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 // Retornar hash de senha:
 async function hashPass(password) {
-    const saltRounds = 10; // Saltos para o hash da senha;
+    const saltRounds = Number(process.env.salt); // Saltos para o hash da senha;
     // Hash de senha:
     const hash = await bcrypt_1.default.hash(password, saltRounds);
     return hash; // Retornando o hash da senha.

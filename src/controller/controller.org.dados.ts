@@ -2,7 +2,7 @@ import ValidationErrors from "../Errors/errors.validadition";
 import FilterData from "./controller.filter.dados";
 
 // Função para organizar os dados recebidos;
-export default async function DUser(req:any){
+export async function DUser(req:any){
 
     // Classe de objetos de usuarios:
     class Usuario {
